@@ -1,0 +1,1 @@
+export { DocumentsSidebar } from "./DocumentsSidebar";

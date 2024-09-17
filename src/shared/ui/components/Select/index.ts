@@ -1,2 +1,1 @@
-export * from "./withSuspense";
 export { Select } from "./Select";

@@ -5,7 +5,7 @@ import { RootNavigator } from "../navigation";
 
 const RootWrapper = styled("main")(({ theme }) => ({
   display: "flex",
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: theme.palette.grey[300],
   width: "100%",
   height: "100vh",
 }));
