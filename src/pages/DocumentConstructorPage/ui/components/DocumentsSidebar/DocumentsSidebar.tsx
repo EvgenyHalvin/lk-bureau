@@ -1,12 +1,13 @@
-import { Button, Paper, Stack, Typography, styled } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import { Button, Paper, Stack, Typography, styled } from "@mui/material";
 
 import { Select } from "@shared/ui";
 
 import {
   DEFAULT_DOCUMENTS_SIDEBAR_VALUES,
-  DOCUMENTS_FORMS,
-  DOCUMENTS_LINES,
+  PROCEEDINGS,
+  DOCUMENTS_TYPES,
+  DOCUMENTS,
   getOptions,
 } from "../../../lib";
 import { TDocumentsSidebarFields } from "../../../types";
@@ -28,14 +29,17 @@ export const DocumentsSidebar = () => {
 
   const onResetHandler = () => reset();
 
-  const documentLine = watch("line");
-  const documentForm = watch("documentForm");
+  const documentProceeding = watch("proceeding");
+  const documentType = watch("documentType");
 
-  const documentLinesOptions = getOptions(DOCUMENTS_LINES);
-  const documentFormOptions = getOptions(DOCUMENTS_FORMS[documentLine]);
+  const documentProceedings = getOptions(PROCEEDINGS);
+  const documentTypes = getOptions(DOCUMENTS_TYPES[documentProceeding]);
+  const documents = getOptions(
+    DOCUMENTS[documentProceeding]?.[documentType] ?? {}
+  );
 
-  const isDocumentFormsHidden = documentLine === "none";
-  const isDocumentsHidden = documentForm === "none";
+  const isDocumentTypesHidden = documentProceeding === "none";
+  const isDocumentsHidden = documentType === "none";
 
   return (
     <StyledDocumentsSidebar elevation={0}>
@@ -49,24 +53,24 @@ export const DocumentsSidebar = () => {
       <Stack gap="16px">
         <Controller
           control={control}
-          name="line"
+          name="proceeding"
           render={({ field }) => (
             <Select
               label="Линия"
-              options={documentLinesOptions}
+              options={documentProceedings}
               selectProps={field}
             />
           )}
         />
 
-        {isDocumentFormsHidden ? null : (
+        {isDocumentTypesHidden ? null : (
           <Controller
             control={control}
-            name="documentForm"
+            name="documentType"
             render={({ field }) => (
               <Select
                 label="Форма"
-                options={documentFormOptions}
+                options={documentTypes}
                 selectProps={field}
               />
             )}
@@ -78,7 +82,11 @@ export const DocumentsSidebar = () => {
             control={control}
             name="document"
             render={({ field }) => (
-              <Select label="Документ" options={[]} selectProps={field} />
+              <Select
+                label="Документ"
+                options={documents}
+                selectProps={field}
+              />
             )}
           />
         )}

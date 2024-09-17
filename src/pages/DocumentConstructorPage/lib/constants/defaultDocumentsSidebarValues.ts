@@ -1,7 +1,12 @@
-import { TDocumentsSidebarFields } from "../../types";
+import {
+  TProceedingEnum,
+  TDocumentTypeEnum,
+  TDocumentEnum,
+  TDocumentsSidebarFields,
+} from "../../types";
 
 export const DEFAULT_DOCUMENTS_SIDEBAR_VALUES: TDocumentsSidebarFields = {
-  line: "none",
-  documentForm: "none",
-  document: "none",
+  proceeding: TProceedingEnum.none,
+  documentType: TDocumentTypeEnum.none,
+  document: TDocumentEnum.none,
 };

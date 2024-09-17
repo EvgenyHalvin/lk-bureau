@@ -1,4 +1,5 @@
-export { DOCUMENTS_LINES } from "./documentsLines";
 export { DEFAULT_DOCUMENTS_SIDEBAR_VALUES } from "./defaultDocumentsSidebarValues";
-export { DOCUMENTS_FORMS } from "./documentsForms";
+
+export { PROCEEDINGS } from "./proceedings";
+export { DOCUMENTS_TYPES } from "./documentTypes";
 export { DOCUMENTS } from "./documents";

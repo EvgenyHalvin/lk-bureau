@@ -1,4 +1,10 @@
-export const DOCUMENTS = {
+import { TDocumentEnum, TDocumentTypeEnum, TProceedingEnum } from "../../types";
+
+export const DOCUMENTS: Record<
+  TProceedingEnum,
+  { [key in TDocumentTypeEnum]?: { [key in TDocumentEnum]?: string } }
+> = {
+  none: {},
   advocateArbitrationProceedings: {
     petition: {
       none: "Не выбрано",
@@ -7,9 +13,6 @@ export const DOCUMENTS = {
     },
   },
   advocateCivilProceedings: {
-    none: "Не выбрано",
-  },
-  prosecutor: {
-    none: "Не выбрано",
+    none: {},
   },
 };
