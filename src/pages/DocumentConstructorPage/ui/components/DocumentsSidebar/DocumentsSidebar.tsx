@@ -10,7 +10,12 @@ import {
   DOCUMENTS,
   getOptions,
 } from "../../../lib";
-import { TDocumentsSidebarFields } from "../../../types";
+import {
+  TDocumentEnum,
+  TDocumentTypeEnum,
+  TDocumentsSidebarFields,
+} from "../../../types";
+import { useEffect } from "react";
 
 const StyledDocumentsSidebar = styled(Paper)(() => ({
   display: "flex",
@@ -23,7 +28,7 @@ const StyledDocumentsSidebar = styled(Paper)(() => ({
 }));
 
 export const DocumentsSidebar = () => {
-  const { control, watch, reset } = useForm<TDocumentsSidebarFields>({
+  const { control, watch, reset, setValue } = useForm<TDocumentsSidebarFields>({
     defaultValues: DEFAULT_DOCUMENTS_SIDEBAR_VALUES,
   });
 
@@ -40,6 +45,17 @@ export const DocumentsSidebar = () => {
 
   const isDocumentTypesHidden = documentProceeding === "none";
   const isDocumentsHidden = documentType === "none";
+
+  useEffect(() => {
+    setValue("documentType", TDocumentTypeEnum.none);
+    setValue("document", TDocumentEnum.none);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [documentProceeding]);
+
+  useEffect(() => {
+    setValue("document", TDocumentEnum.none);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [documentType]);
 
   return (
     <StyledDocumentsSidebar elevation={0}>
