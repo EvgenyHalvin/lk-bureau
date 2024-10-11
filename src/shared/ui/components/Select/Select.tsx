@@ -6,24 +6,26 @@ import {
   SelectProps,
 } from "@mui/material";
 
-type TSelectOption = {
-  value: number | string;
-  label: string;
-};
+import { TSelectOption } from "./types";
 
 type Props = {
   label: string;
   options: TSelectOption[];
   selectProps: SelectProps;
+  onItemClick?: (value: TSelectOption) => void;
 };
 
-export const Select = ({ label, options, selectProps }: Props) => {
+export const Select = ({ label, options, selectProps, onItemClick }: Props) => {
   return (
     <FormControl variant="filled" fullWidth>
       <InputLabel>{label}</InputLabel>
       <MuiSelect {...selectProps}>
         {options.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
+          <MenuItem
+            key={option.value}
+            value={option.value}
+            onClick={() => onItemClick?.(option)}
+          >
             {option.label}
           </MenuItem>
         ))}

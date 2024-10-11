@@ -13,6 +13,7 @@ const PageContent = styled(Stack)(({ theme }) => ({
   margin: "0 auto",
   maxWidth: theme.breakpoints.values.xl,
   flexDirection: "row",
+  gap: 16,
 }));
 
 type Props = {

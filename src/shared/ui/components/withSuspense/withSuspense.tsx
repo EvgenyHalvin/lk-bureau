@@ -5,7 +5,7 @@ export const withSuspense = <P extends object>(
   fallback: SuspenseProps["fallback"] = null
 ) => {
   const WithSuspense = (props: P) => {
-    const fallbackComponent = fallback ?? <>Загрузка...</>;
+    const fallbackComponent = fallback ?? null;
 
     return (
       <Suspense fallback={fallbackComponent}>

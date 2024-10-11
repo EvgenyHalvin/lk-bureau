@@ -20,3 +20,8 @@ export type TDocumentsSidebarFields = {
   documentType: TDocumentTypeEnum;
   document: TDocumentEnum;
 };
+
+export type TSelectedDocument = {
+  value: TDocumentEnum;
+  label: string;
+};

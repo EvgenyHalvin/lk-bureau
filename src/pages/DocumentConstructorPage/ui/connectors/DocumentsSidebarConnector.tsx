@@ -1,5 +1,8 @@
+import { useDocumentConstructorStore } from "../../model";
 import { DocumentsSidebar } from "../components";
 
 export const DocumentsSidebarConnector = () => {
-  return <DocumentsSidebar />;
+  const { updateSelectedDocument } = useDocumentConstructorStore();
+
+  return <DocumentsSidebar onSelectDocument={updateSelectedDocument} />;
 };

@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Button, Paper, Stack, Typography, styled } from "@mui/material";
 
+import { TSelectOption } from "@shared/ui/components/Select";
 import { Select } from "@shared/ui";
 
 import {
@@ -14,8 +16,8 @@ import {
   TDocumentEnum,
   TDocumentTypeEnum,
   TDocumentsSidebarFields,
+  TSelectedDocument,
 } from "../../../types";
-import { useEffect } from "react";
 
 const StyledDocumentsSidebar = styled(Paper)(() => ({
   display: "flex",
@@ -27,7 +29,11 @@ const StyledDocumentsSidebar = styled(Paper)(() => ({
   gap: "24px",
 }));
 
-export const DocumentsSidebar = () => {
+type Props = {
+  onSelectDocument: (value: TSelectedDocument) => void;
+};
+
+export const DocumentsSidebar = ({ onSelectDocument }: Props) => {
   const { control, watch, reset, setValue } = useForm<TDocumentsSidebarFields>({
     defaultValues: DEFAULT_DOCUMENTS_SIDEBAR_VALUES,
   });
@@ -45,6 +51,12 @@ export const DocumentsSidebar = () => {
 
   const isDocumentTypesHidden = documentProceeding === "none";
   const isDocumentsHidden = documentType === "none";
+
+  const onItemClickHandler = ({ label, value }: TSelectOption) =>
+    onSelectDocument({
+      value: String(value) as TDocumentEnum,
+      label: label,
+    });
 
   useEffect(() => {
     setValue("documentType", TDocumentTypeEnum.none);
@@ -102,6 +114,7 @@ export const DocumentsSidebar = () => {
                 label="Документ"
                 options={documents}
                 selectProps={field}
+                onItemClick={onItemClickHandler}
               />
             )}
           />
